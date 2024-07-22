@@ -18,14 +18,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         textView = findViewById(R.id.textView)
-        val button: Button = findViewById(R.id.button)
+        val buttonIncrement: Button = findViewById(R.id.buttonIncrement)
+        val buttonDecrement: Button = findViewById(R.id.buttonDecrement)
         prefManager = PreferenceManager(this)
 
         number = prefManager.getNumber()?.toInt() ?: 0
         updateDisplay()
 
-        button.setOnClickListener {
+        buttonIncrement.setOnClickListener {
             number++
+            prefManager.saveNewNumber(number.toString())
+            updateDisplay()
+        }
+
+        buttonDecrement.setOnClickListener {
+            number--
             prefManager.saveNewNumber(number.toString())
             updateDisplay()
         }
